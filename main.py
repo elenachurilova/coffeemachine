@@ -54,13 +54,30 @@ while True:
                 enough_ingredients = False
                 print(f'Sorry there is not enough {item}')
 
+        given_dollar_amount = 0
         if enough_ingredients:
             print("Please insert coins.")
-            quarters = input("how many quarters?: ")
-            dimes = input("how many dimes?: ")
-            nickles = input("how many nickles?: ")
-            pennies = input("how many pennies?: ")
-            print(f"Here's your {answer} ☕️ Enjoy!")
+            quarters = int(input("how many quarters?: "))
+            dimes = int(input("how many dimes?: "))
+            nickles = int(input("how many nickles?: "))
+            pennies = int(input("how many pennies?: "))
+
+            # count how much money was given
+            given_dollar_amount = (quarters * 0.25) + (dimes * 0.1) + (nickles * 0.05) + (pennies * 0.01)
+
+            # compare to what the cost of the drink is:
+            # if more or enough was given, put money in the register, give change if any
+            if given_dollar_amount >= MENU[answer]["cost"]:
+                change = given_dollar_amount - MENU[answer]["cost"]
+                resources["money"] += given_dollar_amount - change
+                if change > 0:
+                    print(f"Here is ${round(change, 2)} in change")
+                print(f"Here's your {answer} ☕️ Enjoy!")
+
+            # if less was given, refund the money don't make the drink
+            else:
+                print("Sorry that's not enough money. Money refunded.")
+
     elif answer == "off":
         break
     else:
