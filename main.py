@@ -52,6 +52,7 @@ while True:
                 resources[item] -= MENU[answer]["ingredients"][item]
             else:
                 enough_ingredients = False
+                print(f'Sorry there is not enough {item}')
 
         if enough_ingredients:
             print("Please insert coins.")
@@ -59,11 +60,7 @@ while True:
             dimes = input("how many dimes?: ")
             nickles = input("how many nickles?: ")
             pennies = input("how many pennies?: ")
-
             print(f"Here's your {answer} ☕️ Enjoy!")
-        else:
-            print(f'Sorry there is not enough {item}')
-
     elif answer == "off":
         break
     else:
